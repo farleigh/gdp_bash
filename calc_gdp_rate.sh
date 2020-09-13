@@ -4,5 +4,10 @@ if [ -z $1 ]; then
   exit
 fi
 
+if [ ! -f $1 ]; then
+  echo "Input file $1 is missing"
+  exit
+fi
+
 echo "Writing output to >>> $2"
 awk -F',' 'BEGIN{ print "Year,Percent Increase"} {printf("%s,",$1); system("./calc_percent_increase.sh " $2 " " $3)}' $1  > $2
